@@ -43,7 +43,7 @@ def main():
     filenames = ["players.py"]
   else:
     quiz = 'play_isolation'
-    filenames = ["players.py", "challenge.json"]
+    filenames = ["players.py", "challenge_config.json"]
 
   print "Submission processing...\n"
   submission = Submission('cs6601', quiz, 

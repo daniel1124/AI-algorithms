@@ -181,7 +181,7 @@ def game_as_text(winner, move_history, termination=""):
 
     ans.write(termination + "\n")
 
-    ans.write("Winner: " + str(winner))
+    ans.write("Winner: " + str(winner) + "\n")
 
     return ans.getvalue()
 
