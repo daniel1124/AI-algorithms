@@ -29,28 +29,7 @@ def require_pledges():
     raise RuntimeError("Honor pledge not accepted")
   print
 
-def main():
-  parser = argparse.ArgumentParser(description='Submits code to the Udacity site.')
-  parser.add_argument('part', choices = ['assignment_1', 'play_isolation'])
-  parser.add_argument('--provider', choices = ['gt', 'udacity'], default = 'gt')
-  parser.add_argument('--environment', choices = ['local', 'development', 'staging', 'production'], default = 'production')
-
-  args = parser.parse_args()
-
-  if args.part == 'assignment_1':
-    require_pledges()
-    quiz = 'assignment_1'
-    filenames = ["players.py"]
-  else:
-    quiz = 'play_isolation'
-    filenames = ["players.py", "challenge_config.json"]
-
-  print "Submission processing...\n"
-  submission = Submission('cs6601', quiz, 
-                          filenames = filenames, 
-                          environment = args.environment, 
-                          provider = args.provider)
-
+def display_assignment_1_output(submission):
   timestamp = "{:%Y-%m-%d-%H-%M-%S}".format(datetime.datetime.now())
 
   while not submission.poll():
@@ -73,6 +52,45 @@ def main():
     print(json.dumps(error_report, indent=4))
   else:
     print("Unknown error.")
+
+def display_game(submission):
+  while not submission.poll():
+    time.sleep(3.0)
+
+  if submission.feedback():
+    sys.stdout.write(submission.feedback())
+  elif submission.error_report():
+      error_report = submission.error_report()
+      print(json.dumps(error_report, indent=4))
+  else:
+    print("Unknown error.") 
+
+def main():
+  parser = argparse.ArgumentParser(description='Submits code to the Udacity site.')
+  parser.add_argument('part', choices = ['assignment_1', 'play_isolation'])
+  parser.add_argument('--provider', choices = ['gt', 'udacity'], default = 'gt')
+  parser.add_argument('--environment', choices = ['local', 'development', 'staging', 'production'], default = 'production')
+
+  args = parser.parse_args()
+
+  if args.part == 'assignment_1':
+    require_pledges()
+    quiz = 'assignment_1'
+    filenames = ["players.py"]
+  else:
+    quiz = 'play_isolation'
+    filenames = ["players.py", "challenge_config.json"]
+
+  print "Submission processing...\n"
+  submission = Submission('cs6601', quiz, 
+                          filenames = filenames, 
+                          environment = args.environment, 
+                          provider = args.provider)
+
+  if args.part == 'assignment_1':
+    display_assignment_1_output(submission)
+  else:
+    display_game(submission)
 
 if __name__ == '__main__':
   main()
