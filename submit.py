@@ -76,10 +76,10 @@ def main():
   if args.part == 'assignment_1':
     require_pledges()
     quiz = 'assignment_1'
-    filenames = ["players.py"]
+    filenames = ["player_submission.py"]
   else:
     quiz = 'play_isolation'
-    filenames = ["players.py", "challenge_config.json"]
+    filenames = ["player_submission.py", "challenge_config.json"]
 
   print "Submission processing...\n"
   submission = Submission('cs6601', quiz, 

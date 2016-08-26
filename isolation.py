@@ -127,15 +127,12 @@ class Board:
 
     def play_isolation(self, time_limit = None):
         move_history = []
-        
+
         curr_time_millis = lambda : int(round(time() * 1000))
 
         while True:
 
-            legal_player_moves =  self.get_legal_moves()
-
-            if len(legal_player_moves) == 0:
-                return  self.__inactive_player__, move_history, "no legal moves"
+            legal_player_moves =  self.get_legal_moves() # This is only provided as an added benefit
 
             move_start = curr_time_millis()
 
@@ -154,7 +151,7 @@ class Board:
                 move_history[-1].append(curr_move)
 
             if time_limit and time_left() <= 0:
-                return  self.__inactive_player__, move_history, "timeout" 
+                return  self.__inactive_player__, move_history, "timeout"
 
             if curr_move not in legal_player_moves:
                 return self.__inactive_player__, move_history, "illegal move"
@@ -189,8 +186,8 @@ if __name__ == '__main__':
 
     print("Starting game:")
 
-    from player import RandomPlayer
-    from player import HumanPlayer
+    from test_players import RandomPlayer
+    from test_players import HumanPlayer
 
     board = Board(RandomPlayer(), HumanPlayer())
     winner, move_history, termination = board.play_isolation()
