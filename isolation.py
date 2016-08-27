@@ -14,7 +14,7 @@ class Board:
         self.height=height
         self.__board_state__ = [ [Board.BLANK for i in range(0, width)] for j in range(0, height)]
         self.__last_player_move__ = {player_1:(-1,-1), player_2:(-1,-1)}
-        self.__player_symbols__ = {player_1:1, player_2:2}
+        self.__player_symbols__ = {Board.BLANK: Board.BLANK, player_1:1, player_2:2}
         self.move_count = 0
         self.__active_player__ = player_1
         self.__inactive_player__ = player_2
