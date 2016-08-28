@@ -8,12 +8,13 @@ sys.path[0] = os.getcwd()
 
 class Board:
     BLANK = 0
+    NOT_MOVED = (-1, -1)
 
     def __init__(self, player_1, player_2, width=7, height=7):
         self.width=width
         self.height=height
         self.__board_state__ = [ [Board.BLANK for i in range(0, width)] for j in range(0, height)]
-        self.__last_player_move__ = {player_1:(-1,-1), player_2:(-1,-1)}
+        self.__last_player_move__ = {player_1:Board.NOT_MOVED, player_2:Board.NOT_MOVED}
         self.__player_symbols__ = {Board.BLANK: Board.BLANK, player_1:1, player_2:2}
         self.move_count = 0
         self.__active_player__ = player_1
@@ -66,7 +67,7 @@ class Board:
         return self.__get_moves__(self.__last_player_move__[self.__active_player__])
 
     def __get_moves__(self, move):
-        if self.move_count < 2:
+        if move == Board.NOT_MOVED:
             return self.get_first_moves()
 
         r, c = move
@@ -138,12 +139,15 @@ class Board:
 
             time_left = lambda : time_limit - (curr_time_millis() - move_start)
 
-            curr_move = (-1, -1)
+            curr_move = Board.NOT_MOVED
             try:
                 curr_move = self.__active_player__.move(self, legal_player_moves, time_left)
             except Exception as e:
                 print(e)
                 pass
+
+            if curr_move is None:
+                curr_move = Board.NOT_MOVED
 
             if self.__active_player__ == self.__player_1__:
                 move_history.append([curr_move])
@@ -167,13 +171,15 @@ def game_as_text(winner, move_history, termination=""):
     for i, move in enumerate(move_history):
         p1_move = move[0]
         ans.write("%d." % i + " (%d,%d)\n" % p1_move)
-        board.__apply_move__(p1_move)
+        if p1_move != Board.NOT_MOVED:
+            board.__apply_move__(p1_move)
         ans.write(board.print_board())
 
         if len(move) > 1:
             p2_move = move[1]
             ans.write("%d. ..." % i + " (%d,%d)\n" % p2_move)
-            board.__apply_move__(p2_move)
+            if p2_move != Board.NOT_MOVED:
+                board.__apply_move__(p2_move)
             ans.write(board.print_board())
 
     ans.write(termination + "\n")
