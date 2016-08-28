@@ -1,6 +1,6 @@
 # Setup
 Clone this repository recursively:
-`git clone --recursive https://github.gatech.edu/omscs66601/assignment_1.git`
+`git clone --recursive https://github.gatech.edu/omscs6601/assignment_1.git`
 
 (If your version of git does not support recurse clone, then clone without the option and run `git submodule init` and `git submodule update`).
 
