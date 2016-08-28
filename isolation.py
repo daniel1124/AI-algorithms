@@ -163,10 +163,8 @@ class Board:
             self.__apply_move__(curr_move)
 
 
-def game_as_text(winner, move_history, termination=""):
+def game_as_text(winner, move_history, termination="", board=Board(1,2)):
     ans = StringIO.StringIO()
-
-    board = Board(1,2)
 
     for i, move in enumerate(move_history):
         p1_move = move[0]
