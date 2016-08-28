@@ -4,6 +4,8 @@ Clone this repository recursively:
 
 (If your version of git does not support recurse clone, then clone without the option and run `git submodule init` and `git submodule update`).
 
+If you run across certificate authentication issues during the clone, set the git SSL Verify option to false: `git config --global http.sslVerify false`.
+
 # Keeping your code upto date
 After the clone, we recommend creating a branch and developing your agents on that branch:
 
@@ -39,6 +41,11 @@ Finally, commit the new updates to your branch and continue developing:
 
 # Play against a test agent
 To play against a test agent, use `python submit.py play_isolation`. (If you are a TA, add the option `--provider udacity`).
+
+In order to configure the game against the test agent, make sure to edit `challenge_config.json` as desired. Here's an exaplanation of the keys:
+
+- `play_as` - This sets you as either player 1 or player 2. Valid values are `player1` and `player2`.
+- `opponent` - chooses the test AI that you play against. Valid values are `Minimax`, `AlphaBeta`, `Thad`, and `Random`.
 
 # Submit your code
 To submit your code to have it evaluated for a grade, use `python submit.py assignment_1`.  You may submit as many times as you like.  The last submission before the deadline will be used to determine your grade.
