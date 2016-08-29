@@ -40,7 +40,7 @@ def display_assignment_1_output(submission):
     if submission.console():
         sys.stdout.write(submission.console())
 
-    filename = "%s-result-%s.json" % (quiz, timestamp)
+    filename = "%s-result-%s.json" % (submission.quiz_name, timestamp)
 
     with open(filename, "w") as fd:
       json.dump(submission.feedback(), fd, indent=4, separators=(',', ': '))
