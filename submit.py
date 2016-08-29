@@ -9,8 +9,8 @@ from bonnie.submission import Submission
 LATE_POLICY = \
 """Late Policy:
 
-  \"I have read the late policy for CS6601. I understand that only my last 
-  commit before the late submission deadline will be accepted and that late 
+  \"I have read the late policy for CS6601. I understand that only my last
+  commit before the late submission deadline will be accepted and that late
   penalties apply if any part of the assignment is submitted late.\"
 """
 
@@ -63,13 +63,14 @@ def display_game(submission):
       error_report = submission.error_report()
       print(json.dumps(error_report, indent=4))
   else:
-    print("Unknown error.") 
+    print("Unknown error.")
 
 def main():
   parser = argparse.ArgumentParser(description='Submits code to the Udacity site.')
   parser.add_argument('part', choices = ['assignment_1', 'play_isolation'])
   parser.add_argument('--provider', choices = ['gt', 'udacity'], default = 'gt')
   parser.add_argument('--environment', choices = ['local', 'development', 'staging', 'production'], default = 'production')
+  parser.add_argument('--enable-face-off', action='store_true', help='Include this flag to sign up for the playoffs. AI.txt must be present')
 
   args = parser.parse_args()
 
@@ -77,14 +78,19 @@ def main():
     require_pledges()
     quiz = 'assignment_1'
     filenames = ["player_submission.py"]
-  else:
+
+    # Add AI.txt if face off is enabled
+    if parser.enable_face_off:
+      filenames.append("AI.txt")
+
+  else: # args.part == 'play_isolation'
     quiz = 'play_isolation'
     filenames = ["player_submission.py", "challenge_config.json"]
 
   print "Submission processing...\n"
-  submission = Submission('cs6601', quiz, 
-                          filenames = filenames, 
-                          environment = args.environment, 
+  submission = Submission('cs6601', quiz,
+                          filenames = filenames,
+                          environment = args.environment,
                           provider = args.provider)
 
   if args.part == 'assignment_1':

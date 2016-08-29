@@ -45,6 +45,10 @@ Finally, commit the new updates to your branch and continue developing:
 
 `git commit -am "<funny message vilifying TAs for the update>"`
 
+# Testing
+
+A friendly reminder: please ensure that your submission is in `player_submission.py`. The scripts described in the following section automatically send that file to the servers for processing.
+
 # Play against a test agent
 To play against a test agent, use `python submit.py play_isolation`. (If you are a TA, add the option `--provider udacity`).
 
