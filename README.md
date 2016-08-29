@@ -59,3 +59,5 @@ In order to configure the game against the test agent, make sure to edit `challe
 
 # Submit your code
 To submit your code to have it evaluated for a grade, use `python submit.py assignment_1`.  You may submit as many times as you like.  The last submission before the deadline will be used to determine your grade.
+
+To enter yourself into the playoffs against your classmates, run `python submit.py assignment_1 --enable-face-off`. Ensure that you have created the required `AI.txt` to enter the tournament.
