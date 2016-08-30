@@ -80,7 +80,7 @@ def main():
     filenames = ["player_submission.py"]
 
     # Add AI.txt if face off is enabled
-    if parser.enable_face_off:
+    if args.enable_face_off:
       filenames.append("AI.txt")
 
   else: # args.part == 'play_isolation'
