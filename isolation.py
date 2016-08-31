@@ -54,6 +54,9 @@ class Board:
     def get_active_player(self):
         return self.__active_player__
 
+    def get_inactive_player(self):
+        return self.__inactive_player__
+
     def is_winner(self, player):
         return not self.get_legal_moves() and player== self.__inactive_player__
 
