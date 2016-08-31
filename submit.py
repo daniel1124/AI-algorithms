@@ -67,25 +67,20 @@ def display_game(submission):
 
 def main():
   parser = argparse.ArgumentParser(description='Submits code to the Udacity site.')
-  parser.add_argument('part', choices = ['assignment_1', 'play_isolation'])
+  parser.add_argument('part', choices = ['assignment_1'])
   parser.add_argument('--provider', choices = ['gt', 'udacity'], default = 'gt')
   parser.add_argument('--environment', choices = ['local', 'development', 'staging', 'production'], default = 'production')
   parser.add_argument('--enable-face-off', action='store_true', help='Include this flag to sign up for the playoffs. AI.txt must be present')
 
   args = parser.parse_args()
 
-  if args.part == 'assignment_1':
-    require_pledges()
-    quiz = 'assignment_1'
-    filenames = ["player_submission.py"]
+  require_pledges()
+  quiz = 'assignment_1'
+  filenames = ["player_submission.py"]
 
-    # Add AI.txt if face off is enabled
-    if args.enable_face_off:
-      filenames.append("AI.txt")
-
-  else: # args.part == 'play_isolation'
-    quiz = 'play_isolation'
-    filenames = ["player_submission.py", "challenge_config.json"]
+  # Add AI.txt if face off is enabled
+  if args.enable_face_off:
+    filenames.append("AI.txt")
 
   print "Submission processing...\n"
   submission = Submission('cs6601', quiz,
@@ -93,10 +88,7 @@ def main():
                           environment = args.environment,
                           provider = args.provider)
 
-  if args.part == 'assignment_1':
-    display_assignment_1_output(submission)
-  else:
-    display_game(submission)
+  display_assignment_1_output(submission)
 
 if __name__ == '__main__':
   main()
