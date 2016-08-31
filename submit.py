@@ -33,7 +33,7 @@ def display_assignment_1_output(submission):
   timestamp = "{:%Y-%m-%d-%H-%M-%S}".format(datetime.datetime.now())
 
   while not submission.poll():
-    time.sleep(3.0)
+    time.sleep(30.0)
 
   if submission.feedback():
 
@@ -50,18 +50,6 @@ def display_assignment_1_output(submission):
   elif submission.error_report():
     error_report = submission.error_report()
     print(json.dumps(error_report, indent=4))
-  else:
-    print("Unknown error.")
-
-def display_game(submission):
-  while not submission.poll():
-    time.sleep(3.0)
-
-  if submission.feedback():
-    sys.stdout.write(submission.feedback())
-  elif submission.error_report():
-      error_report = submission.error_report()
-      print(json.dumps(error_report, indent=4))
   else:
     print("Unknown error.")
 
