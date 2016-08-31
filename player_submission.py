@@ -10,7 +10,7 @@ class OpenMoveEvalFn():
     """Evaluation function that outputs a
     score equal to how many moves are open
     for the active player."""
-    def score(self, game):
+    def score(self, game, maximizing_player_turn=True):
         # TODO: finish this function!
         return eval_func
 
@@ -20,7 +20,7 @@ class CustomEvalFn():
     however you think it should. This is not
     required but highly encouraged if you
     want to build the best AI possible."""
-    def score(self, game):
+    def score(self, game, maximizing_player_turn=True):
         # TODO: finish this function!
         return eval_func
 
@@ -47,7 +47,8 @@ class CustomPlayer():
         # you will eventually replace minimax with alpha-beta
         return best_move
 
-    def utility(self, game):
+    def utility(self, game, maximizing_player=True):
+        """TODO: Update this function to calculate the utility of a game state"""
 
         if game.is_winner(self):
             return float("inf")
