@@ -7,9 +7,9 @@
 
 # Submission Class 1
 class OpenMoveEvalFn():
-    """Evaluation function that outputs a
+    """Evaluation function that outputs a 
     score equal to how many moves are open
-    for the active player."""
+    for your computer player on the board."""
     def score(self, game, maximizing_player_turn=True):
         # TODO: finish this function!
         return eval_func
