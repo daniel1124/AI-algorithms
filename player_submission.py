@@ -34,7 +34,7 @@ class CustomPlayer():
     You must finish and test this player
     to make sure it properly uses minimax
     and alpha-beta to return a good move
-    in less than 1000 milliseconds."""
+    in less than 500 milliseconds."""
     def __init__(self, search_depth=3, eval_fn=OpenMoveEvalFn()):
         # if you find yourself with a superior eval function, update the
         # default value of `eval_fn` to `CustomEvalFn()`
